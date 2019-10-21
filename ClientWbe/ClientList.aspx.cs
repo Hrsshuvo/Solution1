@@ -23,8 +23,8 @@ namespace ClientWbe
         }
         public void LoadClients()
         {
-            ClientListGridView.DataSource = _clientRepository.GetDepartmentId();
-            ClientListGridView.DataBind();
+            //ClientListGridView.DataSource = _clientRepository.GetDepartmentId();
+            //ClientListGridView.DataBind();
         }
 
         protected void ClientListGridView_RowCommand(object sender, GridViewCommandEventArgs e)

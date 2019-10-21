@@ -62,11 +62,6 @@ namespace ClientWbe
             img.ImageUrl = "data:image/jpg;base64," + Convert.ToBase64String(bytes);
             con.Close();
         }
-        //public void sum()
-        //{
-        //    txtCode.Text = Convert.ToString(Convert.ToInt32(txtCode.Text) + Convert.ToInt32(txtkk.Text));
-        //}
-
         protected void btnNext_Click(object sender, EventArgs e)
         {
             txtId.Text = Convert.ToString(Convert.ToInt32(txtId.Text) + Convert.ToInt32(txtkk.Text));

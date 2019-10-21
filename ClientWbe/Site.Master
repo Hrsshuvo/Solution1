@@ -50,10 +50,12 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/ClientWeb">Add Client</a></li>
+                        <li><a runat="server" href="~/Home">Home</a></li>
+                        <li><a runat="server" href="~/ClientAsp">Add Client</a></li>
                         <li><a runat="server" href="~/ClientSearch">Client Search</a></li>
                         <li><a runat="server" href="~/ClientList">Client List</a></li>
+                         <li><a runat="server" href="~/SheduleSearch">Shedule Search</a></li>UpdateShedule
+                         <li><a runat="server" href="~/UpdateShedule">UpdateShedule</a></li>
                     </ul>
                 </div>
             </div>

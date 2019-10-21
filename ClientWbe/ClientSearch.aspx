@@ -1,39 +1,45 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ClientSearch.aspx.cs" Inherits="ClientWbe.ClientSearch" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-    <table align="center" 
-        
-        style="width: 54%; height: 238px; border: 1px solid #00FFFF; background-color: #F7ECB5; margin-left: 0px;">
+    <asp:Panel ID="Panel1" runat="server" BackColor="RosyBrown">
+        <table>
         <tr>
-            <td class="text-center" style="height: 151px; width: 14%;">
-                <br />
-                <br />
+            <td class="text-center" style="height: 43px; " colspan="7">
+                <asp:Label ID="Label2" runat="server" Font-Size="XX-Large" Text="Client Search Detals"></asp:Label>
             </td>
-            <td style="height: 151px; " class="text-center" colspan="3">
-                <asp:Image ID="img" runat="server" style="max-height:200px;max-width:100%;height:auto;width:auto;" />
-            </td>
-            <td style="height: 151px; width: 25%;" class="text-center">
-                <asp:TextBox ID="txtkk" runat="server" Text="1" Visible="false"></asp:TextBox>
-            </td>
-            <td style="height: 151px; width: 3%;" class="text-center">
-                &nbsp;</td>
         </tr>
-        <tr>
-            <td style="width: 14%" class="text-right">
-                <asp:Label ID="Label1" runat="server" Text="Search By Id"></asp:Label>
+            <tr>
+                <td class="text-justify" style="height: 44px; ">&nbsp;</td>
+                <td class="text-justify" colspan="5" style="height: 44px; ">
+                    <asp:TextBox ID="txtId" runat="server" Text="0" Width="80%"></asp:TextBox>
+                    <asp:Button ID="btnSeatch0" runat="server" OnClick="btnSeatch_Click" Text="Search" Width="20%" />
                 </td>
+                <td class="text-center" style="height: 44px; width: 3%;"></td>
+            </tr>
+            <tr>
+                <td class="text-center" colspan="2" style="height: 151px; width: 14%;">
+                    <br />
+                    <br />
+                </td>
+                <td class="text-center" colspan="3" style="height: 151px; ">
+                    <asp:Image ID="img" runat="server" style="max-height:200px;max-width:100%;height:auto;width:auto;" />
+                </td>
+                <td class="text-center" style="height: 151px; width: 25%;">
+                    <asp:TextBox ID="txtkk" runat="server" Text="1" Visible="false"></asp:TextBox>
+                </td>
+                <td class="text-center" style="height: 151px; width: 3%;">&nbsp;</td>
+            </tr>
+        <tr>
+            <td style="width: 14%" class="text-right" colspan="2">
+                &nbsp;</td>
             <td class="text-center" style="width: 23%">
-                <asp:TextBox ID="txtId" runat="server" Width="131px" Text="0"></asp:TextBox>
-            </td>
+                &nbsp;</td>
             <td class="text-left" colspan="3">
-                <asp:Button ID="btnSeatch" runat="server" Text="Search" 
-                    OnClick="btnSeatch_Click" />
-            </td>
+                &nbsp;</td>
             <td class="text-left" style="width: 3%">
                 &nbsp;</td>
         </tr>
         <tr>
-            <td style="width: 14%" class="text-right">&nbsp;Code</td>
+            <td style="width: 14%" class="text-right" colspan="2">&nbsp;Code</td>
             <td style="width: 23%">
                 <asp:TextBox ID="txtCode" runat="server" Width="133px"></asp:TextBox>
             </td>
@@ -45,7 +51,7 @@
                 &nbsp;</td>
         </tr>
         <tr>
-            <td style="width: 14%" class="text-right">Client Name</td>
+            <td style="width: 14%" class="text-right" colspan="2">Client Name</td>
             <td style="width: 128px" colspan="2">
                 <asp:TextBox ID="txtClientName" runat="server" Width="133px"></asp:TextBox>
             </td>
@@ -57,7 +63,7 @@
                 &nbsp;</td>
         </tr>
         <tr>
-            <td style="width: 14%" class="text-right">Company Name</td>
+            <td style="width: 14%" class="text-right" colspan="2">Company Name</td>
             <td style="width: 128px" colspan="2">
                 <asp:TextBox ID="txtCompantName" runat="server" Width="133px"></asp:TextBox>
             </td>
@@ -69,7 +75,7 @@
                 &nbsp;</td>
         </tr>
         <tr>
-            <td style="width: 14%" class="text-right">Main Adddess</td>
+            <td style="width: 14%" class="text-right" colspan="2">Main Adddess</td>
             <td style="width: 128px" colspan="2">
                 <asp:TextBox ID="txtMainAddress" runat="server" Width="133px"></asp:TextBox>
             </td>
@@ -81,7 +87,7 @@
                 &nbsp;</td>
         </tr>
         <tr>
-            <td style="width: 14%" class="text-right">
+            <td style="width: 14%" class="text-right" colspan="2">
                 <asp:Button ID="Button1" runat="server" Text="Previus" OnClick="Button1_Click" />
             </td>
             <td style="width: 128px" colspan="2">&nbsp;</td>
@@ -93,5 +99,8 @@
                 &nbsp;</td>
         </tr>
     </table>
+
+    </asp:Panel>
+    
 
 </asp:Content>

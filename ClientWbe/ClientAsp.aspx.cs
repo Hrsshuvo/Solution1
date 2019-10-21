@@ -22,6 +22,9 @@ namespace ClientWbe
         {
             AutoCodeGenerate();
             txtDate.Text = DateTime.Now.ToString("dd-MM-yyyy");
+            txtNextShedule.Visible = false;
+            txtProposalSubmissionDate.Visible = false;
+
         }
         public void AutoCodeGenerate()
         {
@@ -55,10 +58,16 @@ namespace ClientWbe
                 userInfo.Code = Convert.ToInt32(txtCode.Text);
                 userInfo.ClientName = txtClientName.Text;
                 userInfo.CompanyName = txtcompanyName.Text;
-                userInfo.ClientContruct = txtClientName.Text;
+                userInfo.ClientContruct = txtClientNumber.Text;
                 userInfo.ConpanyContruct = txtCompanyNumber.Text;
                 userInfo.Address = txtMainAddress.Text;
                 userInfo.ParnamentAddress = txtParnamentAddress.Text;
+                userInfo.VisitingPurpose = dropVisitingPurpose.SelectedItem.ToString();
+                userInfo.NextShedule = dropNextShedule.SelectedItem.ToString();
+                userInfo.NextSheduleDate =txtNextShedule.Text;
+                userInfo.ProposalSubmission = dropProposalSubmission.SelectedItem.ToString();
+                userInfo.ProposalSubmissionDate = Convert.ToDateTime(txtProposalSubmissionDate.Text);
+                userInfo.Note = txtNote.Text;
                 var isSave = _clientRepository.Save(userInfo);
                 if (isSave)
                 {
@@ -180,6 +189,48 @@ namespace ClientWbe
             }
             ViewState["Details"] = dataTable;
             txtFileName.Text = "";
+        }
+        protected void dropMathod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int value = Convert.ToInt32(dropNextShedule.SelectedValue);
+                if (value == 2)
+                {
+                    txtNextShedule.Visible = false;
+                }
+                else if (value == 1)
+                {
+                    txtNextShedule.Visible = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        protected void dropProposalSubmission_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int value = Convert.ToInt32(dropProposalSubmission.SelectedValue);
+                if (value == 2)
+                {
+                    txtProposalSubmissionDate.Visible = false;
+                }
+                else if (value == 1)
+                {
+                    txtProposalSubmissionDate.Visible = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

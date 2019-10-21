@@ -18,7 +18,33 @@ namespace Client.Persistances.Repository
         {
             try
             {
-                var query = "INSERT INTO tbl_ClientInfo (Date, Code, ClientName,CompanyName,ClientContruct,ConpanyContruct,Address,ParnamentAddress) VALUES('" + CIM.Date + "','" + CIM.Code + "','" + CIM.ClientName + "','" + CIM.CompanyName + "','" + CIM.ClientContruct + "','" + CIM.ConpanyContruct + "','" + CIM.Address + "','" + CIM.ParnamentAddress + "')";
+                var query = "INSERT INTO tbl_ClientInfo (Date, Code, ClientName,CompanyName,ClientContruct,ConpanyContruct,Address,ParnamentAddress,VisitingPurpose,NextShedule,NextSheduleDate,ProposalSubmission,ProposalSubmissionDate,Note) VALUES('" + CIM.Date + "','" + CIM.Code + "','" + CIM.ClientName + "','" + CIM.CompanyName + "','" + CIM.ClientContruct + "','" + CIM.ConpanyContruct + "','" + CIM.Address + "','" + CIM.ParnamentAddress + "','"+CIM.VisitingPurpose+"','"+CIM.NextShedule+"','"+CIM.NextSheduleDate+"','"+CIM.ProposalSubmission+"','"+CIM.ProposalSubmissionDate+"','"+CIM.Note+"')";
+                var rowAffected = _databaseCDb.ExecuteNonQuery(query, _connectionString);
+                return rowAffected > 0;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public bool UpDAte(ClientInfoModel CIM)
+        {
+            try
+            {
+                var query = "Update tbl_ClientInfo set ClientName='" + CIM.ClientName + "', CompanyName='" + CIM.CompanyName + "', ClientContruct='" + CIM.ClientContruct + "',Address='" + CIM.Address + "',NextSheduleDate='" + CIM.NextSheduleDate + "' where Id='"+CIM.Id+"'";
+                var rowAffected = _databaseCDb.ExecuteNonQuery(query, _connectionString);
+                return rowAffected > 0;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public bool UpDAte2(ClientInfoModel CIM)
+        {
+            try
+            {
+                var query = "Update tbl_ClientInfo set ClientName='" + CIM.ClientName + "', CompanyName='" + CIM.CompanyName + "', ClientContruct='" + CIM.ClientContruct + "',Address='" + CIM.Address + "',NextSheduleDate='" + CIM.NextSheduleDate + "',Status='"+CIM.Status+ "',Time='"+CIM.Time+ "',Note2='"+CIM.Note2+"' where Id='" + CIM.Id + "'";
                 var rowAffected = _databaseCDb.ExecuteNonQuery(query, _connectionString);
                 return rowAffected > 0;
             }
@@ -79,6 +105,32 @@ namespace Client.Persistances.Repository
             try
             {
                 var query = "SELECT *FROM tbl_ClientInfo";
+                var reader = _databaseCDb.ExecuteReader(query, _connectionString);
+                return reader;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public SqlDataReader GetShedule(string date, string date1)
+        {
+            try
+            {
+                var query = "SELECT * FROM tbl_ClientInfo where NextSheduleDate between '"+ date + "' AND '"+ date1+ "'";
+                var reader = _databaseCDb.ExecuteReader(query, _connectionString);
+                return reader;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public SqlDataReader GetDateNow()
+        {
+            try
+            {
+                var query = "select * from tbl_ClientInfo where NextSheduleDate =CONVERT(date,GETDATE())";
                 var reader = _databaseCDb.ExecuteReader(query, _connectionString);
                 return reader;
             }
