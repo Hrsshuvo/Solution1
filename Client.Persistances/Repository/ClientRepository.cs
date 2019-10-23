@@ -130,7 +130,46 @@ namespace Client.Persistances.Repository
         {
             try
             {
-                var query = "select * from tbl_ClientInfo where NextSheduleDate =CONVERT(date,GETDATE())";
+                var query = "select *from tbl_ClientInfo where NextSheduleDate =CONVERT(date,GETDATE()) AND Status ='0';";
+                var reader = _databaseCDb.ExecuteReader(query, _connectionString);
+                return reader;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public SqlDataReader GetDateNow1()
+        {
+            try
+            {
+                var query = "select *from tbl_ClientInfo where NextSheduleDate =CONVERT(date,GETDATE()) AND Status ='Going';";
+                var reader = _databaseCDb.ExecuteReader(query, _connectionString);
+                return reader;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public SqlDataReader GetDateNow2()
+        {
+            try
+            {
+                var query = "select ClientContruct,Id, Address, Status,ClientName,CompanyName,Time,NextSheduleDate=CONVERT(date,GETDATE()) from tbl_ClientInfo where Status= '0' GROUP BY Status, ClientName,CompanyName,Time,NextSheduleDate,Address,ClientContruct,Id";
+                var reader = _databaseCDb.ExecuteReader(query, _connectionString);
+                return reader;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public SqlDataReader GetGridViewAd()
+        {
+            try
+            {
+                var query = "SELECT TOP 10 Id, ClientName,CompanyName,ClientContruct,Address,ParnamentAddress,VisitingPurpose,NextShedule,NextSheduleDate,ProposalSubmission,ProposalSubmissionDate,Note,ConpanyContruct FROM tbl_ClientInfo ORDER BY Id DESC; ";
                 var reader = _databaseCDb.ExecuteReader(query, _connectionString);
                 return reader;
             }

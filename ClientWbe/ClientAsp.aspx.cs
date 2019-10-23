@@ -24,8 +24,39 @@ namespace ClientWbe
             txtDate.Text = DateTime.Now.ToString("dd-MM-yyyy");
             txtNextShedule.Visible = false;
             txtProposalSubmissionDate.Visible = false;
+            Gridok();
 
         }
+
+        public void Gridok()
+        {
+            var sl = _clientRepository.GetGridViewAd();
+            GridView2.DataSource = sl;
+            GridView2.DataBind();
+        }
+        public void LoadGridview()
+        {
+            int Id = Convert.ToInt32(txtCode.Text);
+            string query = "SELECT  *FROM tbl_File WHERE ClientId = @Id";
+            string conString = "Server = localhost; Database = ClintDB; Trusted_Connection = True";
+            using (SqlConnection con = new SqlConnection(conString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@Id", Id);
+                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                    {
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+                            GridView1.DataSource = dt;
+                            GridView1.DataBind();
+                        }
+                    }
+                }
+            }
+        }
+
         public void AutoCodeGenerate()
         {
             decimal AlreadyExistData = _clientRepository.AlreadyExistData();
@@ -66,7 +97,7 @@ namespace ClientWbe
                 userInfo.NextShedule = dropNextShedule.SelectedItem.ToString();
                 userInfo.NextSheduleDate =txtNextShedule.Text;
                 userInfo.ProposalSubmission = dropProposalSubmission.SelectedItem.ToString();
-                userInfo.ProposalSubmissionDate = Convert.ToDateTime(txtProposalSubmissionDate.Text);
+                userInfo.ProposalSubmissionDate =txtProposalSubmissionDate.Text;
                 userInfo.Note = txtNote.Text;
                 var isSave = _clientRepository.Save(userInfo);
                 if (isSave)
@@ -74,6 +105,7 @@ namespace ClientWbe
                     string successMessage = " Saved Successfully";
                     lblMessage.Text = successMessage;
                     lblMessage.ForeColor = Color.Green;
+                    Gridok();
                     Refresh();
                     return;
                 }
@@ -110,7 +142,6 @@ namespace ClientWbe
                         _ClientFile.Name = dr["Name"].ToString();
                         _ClientFile.Image = (byte[])dr["Image"];
                         _ClientFile.ClientId = Convert.ToInt32(Id);
-
                         string query = "INSERT INTO tbl_File VALUES(@Name, @Image, @ClientId)";
                         using (SqlCommand cmd = new SqlCommand(query, Sqlcon))
                         {
@@ -132,6 +163,15 @@ namespace ClientWbe
                 }
             }
         }
+        //protected void cardAttachedGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        //{
+        //    if (e.Row.RowType == DataControlRowType.DataRow)
+        //    {
+        //        DataRowView dr = (DataRowView)e.Row.DataItem;
+        //        string imageUrl = "data:image/jpg;base64," + Convert.ToBase64String((byte[])dr["Image"]);
+        //        (e.Row.FindControl("Image1") as System.Web.UI.WebControls.Image).ImageUrl = imageUrl;
+        //    }
+        //}
 
         protected void btnAddImage_Click(object sender, EventArgs e)
         {
@@ -142,6 +182,7 @@ namespace ClientWbe
             }
 
             DataTable dataTable = new DataTable();
+
             dataTable.Columns.Add("Name", typeof(string));
             dataTable.Columns.Add("Image", typeof(byte[]));
             DataRow dr = null;
@@ -156,6 +197,7 @@ namespace ClientWbe
                         dr = dataTable.NewRow();
                         dr["Name"] = txtFileName.Text;
                         dr["Image"] = bytes;
+                        
 
                         dataTable.Rows.Add(dr);
 
@@ -230,6 +272,34 @@ namespace ClientWbe
             {
 
                 throw;
+            }
+        }
+
+        protected void GridView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtCode.Text = GridView2.SelectedRow.Cells[0].Text;
+            txtClientName.Text = GridView2.SelectedRow.Cells[1].Text;
+            txtcompanyName.Text = GridView2.SelectedRow.Cells[2].Text;
+            txtClientNumber.Text = GridView2.SelectedRow.Cells[3].Text;
+            txtMainAddress.Text = GridView2.SelectedRow.Cells[4].Text;
+            txtParnamentAddress.Text = GridView2.SelectedRow.Cells[5].Text;
+            dropVisitingPurpose.DataTextField = GridView2.SelectedRow.Cells[6].Text;
+            dropNextShedule.DataTextField = GridView2.SelectedRow.Cells[7].Text;
+            txtNextShedule.Text = GridView2.SelectedRow.Cells[8].Text;
+            dropProposalSubmission.DataTextField = GridView2.SelectedRow.Cells[9].Text;
+            txtProposalSubmissionDate.Text = GridView2.SelectedRow.Cells[10].Text;
+            txtNote.Text = GridView2.SelectedRow.Cells[11].Text;
+            txtCompanyNumber.Text = GridView2.SelectedRow.Cells[12].Text;
+            LoadGridview();
+        }
+
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DataRowView dr = (DataRowView)e.Row.DataItem;
+                string imageUrl = "data:image/jpg;base64," + Convert.ToBase64String((byte[])dr["Image"]);
+                (e.Row.FindControl("Image1") as System.Web.UI.WebControls.Image).ImageUrl = imageUrl;
             }
         }
     }

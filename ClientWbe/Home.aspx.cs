@@ -18,8 +18,16 @@ namespace ClientWbe
             if (!IsPostBack)
             {
                 GetGrid();
+                GetGrid1();
                 txtTime.Visible = false;
             }
+        }
+
+        public void GetGrid1()
+        {
+            var sl = clientRepository.GetDateNow1();
+            GridView2.DataSource = sl;
+            GridView2.DataBind();
         }
 
         public void GetGrid()
@@ -46,16 +54,15 @@ namespace ClientWbe
                 userInfo.Status = dropProposalSubmission.SelectedItem.ToString();
                 userInfo.Time = txtTime.Text;
                 userInfo.Note2 = txtNote.Text;
-                GridView1.DataBind();
-                //GridView1.DataSource = null;
-                //GridView1.DataSourceID =_clientRepository.GetShedule("date,date1");
-                GridView1.SelectedIndex = -1;
+                //GridView1.DataBind();
                 var isUpdate = clientRepository.UpDAte2(userInfo);
                 if (isUpdate)
                 {
-                    string successMessage = " Update Successfully";
-                    lblMessage.Text = successMessage;
-                    lblMessage.ForeColor = Color.Green;
+                    //string successMessage = " Update Successfully";
+                    //lblMessage.Text = successMessage;
+                    //lblMessage.ForeColor = Color.Green;
+                    GetGrid1();
+                    GetGrid();
                     return;
                 }
                 string failMessage = "Fild Not Saved ";
@@ -73,12 +80,12 @@ namespace ClientWbe
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            txtClientName.Text = GridView1.SelectedRow.Cells[0].Text;
-            txtCompanyName.Text = GridView1.SelectedRow.Cells[1].Text;
-            txtClientContuct.Text = GridView1.SelectedRow.Cells[2].Text;
-            txtAdress.Text = GridView1.SelectedRow.Cells[3].Text;
-            txtDate.Text = GridView1.SelectedRow.Cells[4].Text;
-            txtId.Text = GridView1.SelectedRow.Cells[5].Text;
+            txtClientName.Text = GridView1.SelectedRow.Cells[1].Text;
+            txtCompanyName.Text = GridView1.SelectedRow.Cells[2].Text;
+            txtClientContuct.Text = GridView1.SelectedRow.Cells[3].Text;
+            txtAdress.Text = GridView1.SelectedRow.Cells[4].Text;
+            txtDate.Text = GridView1.SelectedRow.Cells[5].Text;
+            txtId.Text = GridView1.SelectedRow.Cells[6].Text;
             //TextBox1.Enabled = false;
             ModalPopupExtender2.Show();
         }
@@ -91,10 +98,13 @@ namespace ClientWbe
                 if (value == 2)
                 {
                     txtTime.Visible = false;
+                    Panel1.Visible = true;
                 }
                 else if (value == 1)
                 {
                     txtTime.Visible = true;
+                    Panel1.Visible = true;
+                    ModalPopupExtender2.Show();
                 }
             }
             catch (Exception)

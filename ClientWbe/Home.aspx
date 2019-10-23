@@ -1,17 +1,46 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="ClientWbe.Home" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-   <link href="CSS/StyleSheet1.css" rel="stylesheet" />
-       <table align="center" cellpadding="5" cellspacing="5" style="width: 72%; height: 266px; border: 1px solid #D58512; background-color: #2E6DA4">
+    <link href="CSS/StyleSheet1.css" rel="stylesheet" />
+       <table align="center" cellpadding="5" cellspacing="5" style="width: 72%; height: 688px; border: 1px solid #D58512; background-color: #2E6DA4">
         <tr>
             <td class="text-center" colspan="5">
-                <asp:Label ID="Label3" runat="server" Text="Client Next Shedule Search" Font-Size="XX-Large"></asp:Label>
+                <asp:Label ID="Label3" runat="server" Text="Marketig  Shedule Today" Font-Size="XX-Large"></asp:Label>
             </td>
         </tr>
         <tr>
             <td>
                 &nbsp;</td>
             <td class="text-justify">
-                &nbsp;</td>
+                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" style="margin-left: 150px; margin-top: 0px;" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Height="16px" CellPadding="4" ForeColor="#333333" GridLines="None">
+                    <AlternatingRowStyle BackColor="White" />
+                    <Columns>
+                        <asp:TemplateField HeaderText="Number">
+                        <ItemTemplate>
+                        <%# Container.DisplayIndex+1 %>
+                        </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:BoundField DataField="ClientName" HeaderText="ClientName" />
+                        <asp:BoundField DataField="CompanyName" HeaderText="CompanyName" />
+                        <asp:BoundField DataField="ClientContruct" HeaderText="ClientContruct" />
+                        <asp:BoundField DataField="Address" HeaderText="Address" />
+                        <asp:BoundField DataField="NextSheduleDate" HeaderText="NextSheduleDate" DataFormatString="{0:dd/MM/yy}" />
+
+                        <asp:BoundField DataField="Id" HeaderText="Id" />
+
+                        <asp:CommandField SelectText="Going / Cencle" ShowSelectButton="True" />
+
+                    </Columns>
+                    <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
+                    <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="Navy" />
+                    <SortedAscendingCellStyle BackColor="#FDF5AC" />
+                    <SortedAscendingHeaderStyle BackColor="#4D0000" />
+                    <SortedDescendingCellStyle BackColor="#FCF6C0" />
+                    <SortedDescendingHeaderStyle BackColor="#820000" />
+                </asp:GridView>
+                </td>
             <td>
                 &nbsp;</td>
             <td class="text-justify">
@@ -20,23 +49,34 @@
                 &nbsp;</td>
         </tr>
         <tr>
-            <td class="text-center" colspan="5">
-                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" style="margin-left: 150px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-                    <Columns>
-                        <asp:BoundField DataField="ClientName" HeaderText="Client Name" />
-                        <asp:BoundField DataField="CompanyName" HeaderText="Company Name" />
-                        <asp:BoundField DataField="ClientContruct" HeaderText="Client Contruct" />
-                        <asp:BoundField DataField="Address" HeaderText="Address" />
-                        <asp:BoundField DataField="NextSheduleDate" HeaderText="Next Shedule Date" DataFormatString="{0:dd/MM/yy}" />
-
-                        <asp:BoundField DataField="Id" HeaderText="Id" />
-
-                        <asp:CommandField SelectText="Edit" ShowSelectButton="True" />
-
-                    </Columns>
-                </asp:GridView>
+            <td class="text-center" colspan="5" style="height: 420px">
+                <asp:Label ID="Label4" runat="server" Text="Going List Today" Font-Size="XX-Large"></asp:Label>
                 <br />
-                <asp:GridView ID="GridView2" runat="server">
+                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" style="margin-left: 169px" Width="558px" CellPadding="4" ForeColor="#333333" GridLines="None">
+                    <AlternatingRowStyle BackColor="White" />
+                    <Columns>
+                        <asp:TemplateField HeaderText="Number">
+                        <ItemTemplate>
+                        <%# Container.DisplayIndex+1 %>
+                        </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:BoundField DataField="ClientName" HeaderText="ClientName" />
+                        <asp:BoundField DataField="CompanyName" HeaderText="CompanyName" />
+                        <asp:BoundField DataField="Address" HeaderText="Address" />
+                        <asp:BoundField DataField="ClientContruct" HeaderText="ClientContruct" />
+                        <asp:BoundField DataField="Status" HeaderText="Status" />
+                        <asp:BoundField DataField="NextSheduleDate" HeaderText="SheduleDate" DataFormatString="{0:dd/MM/yyyy}" />
+                        <asp:BoundField DataField="Time" HeaderText="Time" />
+                    </Columns>
+                    <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
+                    <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="Navy" />
+                    <SortedAscendingCellStyle BackColor="#FDF5AC" />
+                    <SortedAscendingHeaderStyle BackColor="#4D0000" />
+                    <SortedDescendingCellStyle BackColor="#FCF6C0" />
+                    <SortedDescendingHeaderStyle BackColor="#820000" />
                 </asp:GridView>
             </td>
         </tr>
@@ -93,8 +133,8 @@
                             <td>
                                 <asp:DropDownList ID="dropProposalSubmission" runat="server" Height="17px" Width="135px" AutoPostBack="true" OnSelectedIndexChanged="dropProposalSubmission_SelectedIndexChanged">
                                     <asp:ListItem Selected="False" Value="0" >Select</asp:ListItem>
-                                    <asp:ListItem Value="1"> Going </asp:ListItem>
-                                    <asp:ListItem Value="2"> Cencle </asp:ListItem>
+                                    <asp:ListItem Value="1">Going</asp:ListItem>
+                                    <asp:ListItem Value="2">Cencle</asp:ListItem>
                                 </asp:DropDownList>
                                 <asp:TextBox ID="txtTime" runat="server" TextMode="Time"></asp:TextBox>
                             </td>
@@ -128,4 +168,5 @@
                 </td>
         </tr>
     </table>
+       <br />
        </asp:Content>

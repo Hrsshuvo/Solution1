@@ -121,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="ClientAdded.aspx" />
     <Content Include="ClientAsp.aspx" />
     <Content Include="ClientList.aspx" />
     <Content Include="ClientSearch.aspx" />
@@ -132,6 +133,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="CSS\StyleSheet1.css" />
+    <Content Include="CSS\StyleSheet2.css" />
+    <Content Include="CSS\StyleSheet3.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -149,9 +152,7 @@
     <Content Include="Image\Felis_silvestris_silvestris_small_gradual_decrease_of_quality.png" />
     <Content Include="Image\jpegsystems-home.jpg" />
     <Content Include="SheduleSearch.aspx" />
-    <Content Include="SlidS.xml" />
     <Content Include="UpdateShedule.aspx" />
-    <Content Include="WebForm1.aspx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -197,6 +198,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="ClientAdded.aspx.cs">
+      <DependentUpon>ClientAdded.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientAdded.aspx.designer.cs">
+      <DependentUpon>ClientAdded.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ClientAsp.aspx.cs">
       <DependentUpon>ClientAsp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -284,13 +292,6 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

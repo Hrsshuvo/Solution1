@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ClientAsp.aspx.cs" Inherits="ClientWbe.ClientAsp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
     <%--    <form id="form1" runat="server">--%>
-    <asp:Panel ID="Panel1" runat="server" BackColor="RoyalBlue" Height="649px">
+    <asp:Panel ID="Panel1" runat="server" BackColor="RoyalBlue" Height="1004px">
          <div>
 
             <table align="center" cellpadding="6" cellspacing="5" class="auto-style1" style="height: 334px">
@@ -124,10 +125,18 @@
             </tr>
             <tr>
                 <td class="auto-style20" colspan="3">
-                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False">
+                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowDataBound="GridView1_RowDataBound">
                         <Columns>
-                            <asp:BoundField DataField="Image" HeaderText="File" />
+                            <asp:BoundField DataField="ClientId" HeaderText="Id" />
                             <asp:BoundField DataField="Name" HeaderText="FileName" />
+                        <asp:TemplateField HeaderText="ImagePreview">
+                        <FooterStyle HorizontalAlign="Center" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" Width="20%" Height="25PX"></ItemStyle>
+                        <ItemTemplate>
+                            <asp:Image ID="Image1" runat="server" Height="31px" Width="32px" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </td>
@@ -139,6 +148,27 @@
                 </td>
             </tr>
         </table>
+         <div class="text-center">
+             <br />
+             <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" style="margin-left: 43px" Width="1060px">
+                 <Columns>
+                     <asp:BoundField DataField="Id" HeaderText="Id" />
+                     <asp:BoundField DataField="ClientName" HeaderText="Client Name" />
+                     <asp:BoundField DataField="CompanyName" HeaderText="Company Name" />
+                     <asp:BoundField DataField="ClientContruct" HeaderText="Client Contruct" />
+                     <asp:BoundField DataField="Address" HeaderText="Address" />
+                     <asp:BoundField DataField="ParnamentAddress" HeaderText="Parnament Address" />
+                     <asp:BoundField DataField="VisitingPurpose" HeaderText="Visiting Purpose" />
+                     <asp:BoundField DataField="NextShedule" HeaderText="NextShedule" />
+                     <asp:BoundField DataField="NextSheduleDate" HeaderText="NextSheduleDate" />
+                     <asp:BoundField DataField="ProposalSubmission" HeaderText="ProposalSubmission" />
+                     <asp:BoundField DataField="ProposalSubmissionDate" HeaderText="ProposalSubmissionDate" />
+                     <asp:BoundField DataField="Note" HeaderText="Note" />
+                     <asp:BoundField DataField="ConpanyContruct" HeaderText="Conpany Contruct" />
+                     <asp:CommandField HeaderText="Edit" ShowSelectButton="True" />
+                 </Columns>
+             </asp:GridView>
+         </div>
     </asp:Panel>
 <%--    </form>--%>
 </asp:Content>
